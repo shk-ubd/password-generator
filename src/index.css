@@ -3,7 +3,12 @@
 @tailwind utilities;
 
 body {
-    background: radial-gradient(circle at 24.1% 68.8%, #222629 0%, rgb(0, 0, 0) 99.4%);
-    padding: 2rem;
+    /* background: radial-gradient(circle at 24.1% 68.8%, #282828 0%, rgb(0, 0, 0) 99.8%); */
+    background-color: #151515;
+    padding: 2rem 0.5rem;
     height: 100vh;
+}
+
+.outer {
+    box-shadow: rgba(255, 255, 255, 0.25) 0px 25px 50px -12px;
 }
