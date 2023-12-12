@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    background: radial-gradient(circle at 24.1% 68.8%, #222629 0%, rgb(0, 0, 0) 99.4%);
+    padding: 2rem;
+    height: 100vh;
+}

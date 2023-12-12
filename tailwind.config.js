@@ -6,6 +6,17 @@ export default {
   ],
   theme: {
     extend: {},
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      'green': '#61892F',
+      'brightgreen': '#86C232',
+      'midnight': '#222629',
+      'gray': '#474B4F',
+      'lightgray': '#6b6E70',
+      'white': "#ffffff",
+      'black': "#000000"
+    },
   },
   plugins: [],
 }

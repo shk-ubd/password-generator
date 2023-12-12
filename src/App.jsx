@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 function App() {
   const [length, setLength] = useState(8)
   const [numAllowed, setNumAllowed] = useState(false)
   const [specialAllowed, setspecialAllowed] = useState(false)
   const [password, setPassword] = useState("")
+
+  const passwordRef = useRef(null)
 
   const passwordGenerator = useCallback(() => {
     let pass = ""
@@ -24,6 +26,11 @@ function App() {
 
   }, [numAllowed, specialAllowed, length, setPassword])
 
+  const copyPasswordToClipboard= useCallback(() => {
+    passwordRef.current?.select()
+    window.navigator.clipboard.writeText(password)
+  }, [password])
+
   useEffect(() => {
     passwordGenerator()
   }
@@ -31,43 +38,47 @@ function App() {
 
   return (
     <>
-      <div className='w-full max-w-2xl bg-gray-700 rounded-lg px-8 py-4 m-auto mt-5 flex flex-col justify-center'>
+      <div className='w-full max-w-2xl bg-gray rounded-lg px-8 py-4 mx-auto  flex flex-col justify-center shadow-brightgreen shadow-md'>
 
-        <h1 className="text-white text-4xl al text-center my-4" > Password Generator</h1>
+        <h1 className=" text-white text-4xl al text-center my-4" > Password Generator</h1>
 
 
         <div
           className='mx-auto w-4/5'
         >
           <input
-            className='py-3 px-4 rounded-l-xl w-4/5'
+            className='py-3 px-4 rounded-l-xl w-4/5 '
             type="text"
-            placeholder={password}
+            placeholder = "password"
+            value ={password}
             readOnly
-
+            ref = {passwordRef}
           />
           <button
-            className='bg-blue-500 rounded-r-xl py-3 px-4 w-1/5 my-3'
+            onClick={copyPasswordToClipboard}  
+            className='bg-green hover:bg-brightgreen transition duration-300 ease-in-out rounded-r-xl py-3 px-4 w-1/5 my-3'
           >Copy</button>
         </div>
 
-        <div className='flex justify-around items-center my-5'>
+        <div className='flex justify-around items-center my-5 text-white'>
 
-          <div>
+          <div className="flex items-center  gap-x-1 ">
             <input
               type="range"
               min={6}
               max={20}
               value={length}
-              className='cursor-pointer'
+              className='cursor-pointer accent-brightgreen'
               onChange={(e) => {setLength(e.target.value) }}
             />
             <label>{length}</label>
           </div>
 
-          <div>
+          <div className="flex items-center gap-x-1" >
 
-            <input type="checkbox"
+            <input
+              className='accent-brightgreen'
+              type="checkbox"
               defaultChecked={numAllowed}
               id="numbers"
               onChange={() => {
@@ -80,9 +91,11 @@ function App() {
           </div>
 
 
-          <div>
+          <div className="flex items-center gap-x-1 " >
 
-            <input type="checkbox"
+            <input 
+              className='accent-brightgreen p-2'
+              type="checkbox"
               defaultChecked={specialAllowed}
               id="special"
               onChange={() => {
